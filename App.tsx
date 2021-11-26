@@ -59,7 +59,7 @@ const onClickHandler = () => {
        <Button title='First Button with link' onPress={()=>{Linking.openURL('https://www.youtube.com/channel/UCAv9XxyGRILl8jklbGDXCkg/featured')}}></Button>
        <Button title='HookState Button' onPress={onClickHandler} color='#66ff33'></Button>
        <Text style={styles.text}>You clicked the button {clicks} times and your bank acount has {clicks * 5} $</Text>
-         }
+           }
        </ScrollView>
     </View>
   );
