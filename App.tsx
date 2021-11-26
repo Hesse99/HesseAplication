@@ -1,112 +1,67 @@
-import React,{useState} from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  Linking,
-  Alert,
-  ScrollView,
-} from 'react-native';
+import React from 'react';
+import {MainScreen} from './src/screens/MainScreen/MainScreen';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {FruitScreen} from './src/screens/FruitScreen/FruitScreen';
+import {ScreenA} from './src/screens/ScreenA/ScreenA';
+import {ScreenB} from './src/screens/ScreenB/ScreenB';
+import {ScreenC} from './src/screens/ScreenC/ScreenC';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const App = () => {
-const [name, setName] = useState('Hesse')
-const [session, setSession]= useState({number: 6, title: 'state' })
-const [current, setCurrent]= useState(true)
-const [clicks, setClicks] = useState(0)
-const [Items, setItems] = useState([
-{key: 1, item: 'Item 1'},
-{key: 2, item: 'Item 2'},
-{key: 3, item: 'Item 3'},
-{key: 4, item: 'Item 4'},
-{key: 5, item: 'Item 5'},
-{key: 6, item: 'Item 6'},
-{key: 7, item: 'Item 7'},
-{key: 8, item: 'Item 8'},
-{key: 0, item: 'Item 9'},
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
-])
-
-const onClickHandler = () => {
-  setName('Avem un nou text modificat dinamic')
-  setSession({number:7, title: 'Style'})
-  setCurrent(false)
-  setClicks(clicks + 1)
- // Alert.alert('Button for count')
+function MyStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="MainScreen" component={MainScreen} options={{}} />
+      <Stack.Screen name="FruitScreen" component={FruitScreen} />
+    </Stack.Navigator>
+  );
 }
 
+const App = () => {
   return (
-    
-   <View style={styles.body}>
-       <ScrollView>{
-        Items.map = (object) => {
-          return(
-            <View style={styles.item} key={object.key}>
-             <Text style={styles.item}>{object.item}</Text>
-            </View>
-          )
-        }
-       <View style={styles.view1}>
-          <Text style={styles.text}>first view by Hesse</Text>
-       </View>
-       <View style={styles.view2}>
-          <Text style={styles.text}>Second4 view by Hesse </Text>
-       </View>
-      
-       <Text style={styles.text}>{name}</Text>
-       <Text style={styles.text}>This is session number {session.number} and title  {session.title}</Text>
-       <Text style={styles.text}>{current ? 'current session' : 'next session'}</Text>
-       <Button title='First Button with link' onPress={()=>{Linking.openURL('https://www.youtube.com/channel/UCAv9XxyGRILl8jklbGDXCkg/featured')}}></Button>
-       <Button title='HookState Button' onPress={onClickHandler} color='#66ff33'></Button>
-       <Text style={styles.text}>You clicked the button {clicks} times and your bank acount has {clicks * 5} $</Text>
-           }
-       </ScrollView>
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={({route}) => ({
+          tabBarIcon: ({focused}) => {
+            let iconName;
+
+            if (route.name === 'MainStack') {
+              iconName = 'ios-home';
+            } else if (route.name === 'ScreenA') {
+              iconName = 'md-person';
+            } else if (route.name === 'ScreenB') {
+              iconName = 'ios-settings';
+            } else if (route.name === 'ScreenC') {
+              iconName = 'md-cart';
+            }
+            return (
+              <Ionicons
+                name={iconName}
+                size={focused === true ? 25 : 20}
+                color={focused ? '#f0f' : '#555'}
+              />
+            );
+          },
+          header: () => null,
+          activeTintColor: '#f0f',
+          inactiveBackgroundColor: '#999',
+          tabBarShowLabel: false,
+        })}>
+        <Tab.Screen name="MainStack" component={MyStack} />
+        <Tab.Screen name="ScreenA" component={ScreenA} />
+        <Tab.Screen name="ScreenB" component={ScreenB} />
+        <Tab.Screen
+          name="ScreenC"
+          component={ScreenC}
+          options={{tabBarBadge: 10}}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  body: {
-     flex: 1,
-     flexDirection: 'column',
-     //width: '100%',
-     //height: '100%',
-     backgroundColor: '#ff9999',
-     alignItems: 'center',
-     justifyContent: 'center',
-     borderStyle : 'solid',
-     borderWidth: 10,
-  },
-  text: {
-    color: '#000000',
-    fontSize: 22,
-    fontStyle: 'italic',
-    margin: 10, 
-    textTransform: 'uppercase',
-    
-  },
-  view1: {
-    flex: 1,
-   //witdth: 100,
-   //height: 100,
-   backgroundColor: '#ffff00',
-   alignItems: 'center',
-   justifyContent: 'center',
-  },
-  view2: {
-  // witdth: 100,
-   //height: 100,
-   flex: 1,
-   backgroundColor: '#ff1111',
-   alignItems: 'center',
-   justifyContent: 'center',
-  },
-  item :{
-    margin: 10,
-    backgroundColor:'#cc00ff',
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
-});
 
 export default App;
