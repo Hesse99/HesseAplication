@@ -5,11 +5,9 @@ const FruitStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ff9999',
   },
-  button: {
-    margin: 9,
-    backgroundColor: '#ee4',
-    borderWidth: 1,
-    borderColor: '#515',
+  page: {
+    width: '100%',
+    padding: 5,
   },
   item: {
     flexDirection: 'row',
@@ -21,10 +19,6 @@ const FruitStyles = StyleSheet.create({
     width: '100%',
     flex: 1,
   },
-  titleFlatList: {
-    fontSize: 14,
-    width: '100%',
-  },
   imageFlatList: {
     height: 160,
     resizeMode: 'contain',
@@ -35,9 +29,27 @@ const FruitStyles = StyleSheet.create({
     padding: 5,
     flex: 3,
   },
-  page: {
+  button: {
+    //margin: 9,
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#515',
+    borderRadius: 5,
+    marginTop: 35,
+    marginLeft: 165,
+    width: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  titleFlatList: {
+    fontSize: 14,
     width: '100%',
-    padding: 5,
+  },
+  titlePrice: {
+    fontSize: 14,
+    width: '100%',
+    fontWeight: 'bold',
   },
 });
 
