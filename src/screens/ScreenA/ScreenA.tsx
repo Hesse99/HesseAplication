@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ScrollView, View, Image} from 'react-native';
+import {View, ScrollView, Image} from 'react-native';
 import Logo from '../../../assets/images/new_logo_Hesse.png';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import Styles from './ScreenA.style.ts';

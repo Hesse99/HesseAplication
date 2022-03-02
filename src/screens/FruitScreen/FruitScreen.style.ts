@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 const FruitStyles = StyleSheet.create({
   body: {
     flex: 1,
-    backgroundColor: '#ff9999',
+    backgroundColor: '#3982ac',
   },
   page: {
     width: '100%',
@@ -20,12 +20,12 @@ const FruitStyles = StyleSheet.create({
     flex: 1,
   },
   imageFlatList: {
-    height: 160,
+    //height: 160,
     resizeMode: 'contain',
     flex: 2,
   },
   rightContainer: {
-    backgroundColor: '#9999ff',
+    backgroundColor: '#80aaff',
     padding: 5,
     flex: 3,
   },

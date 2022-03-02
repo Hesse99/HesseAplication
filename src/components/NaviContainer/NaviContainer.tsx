@@ -45,15 +45,18 @@ const NaviContainer = () => {
             <Ionicons
               name={iconName}
               size={focused === true ? 25 : 20}
-              color={focused ? '#f0f' : '#555'}
+              color={focused ? '#002266' : '#555'}
             />
           );
         },
         header: () => null,
-        activeTintColor: '#f0f',
+        activeTintColor: '#002266',
         inactiveBackgroundColor: '#999',
         tabBarShowLabel: false,
         tabBarHideOnKeyboard: true,
+        tabBarStyle: {
+          backgroundColor: '#ccddff',
+        },
       })}>
       <Tab.Screen name="MainStack" component={MyStack} />
       <Tab.Screen name="ScreenA" component={ScreenA} />

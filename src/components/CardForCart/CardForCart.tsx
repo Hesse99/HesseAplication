@@ -15,9 +15,7 @@ const CardForCart = ({item}) => {
       </View>
       <View style={Styles.viewCard1}>
         <Text style={Styles.textNumeProdus}>{item.numeProdus}</Text>
-        <Text style={Styles.textPret}>
-          {item.pret * (item.quantity || 1)} RON
-        </Text>
+        <Text style={Styles.textPret}>{item.pret} RON/kg</Text>
       </View>
       <View style={Styles.viewCard2}>
         <View style={Styles.viewQuantity}>

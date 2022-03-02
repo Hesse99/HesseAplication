@@ -3,11 +3,13 @@ import {
   INCREASE_QUANTITY,
   GET_ITEMS,
   ADD_ITEM,
+  POST_REGISTER,
 } from './actions';
 
 const initialState = {
   items: [],
   cartitem: [],
+  user: {},
 };
 
 function userReducer(state = initialState, action) {
@@ -47,6 +49,9 @@ function userReducer(state = initialState, action) {
       return {...state, items: action.payload};
     case ADD_ITEM:
       return {...state, cartitem: [action.payload, ...state.cartitem]};
+    case POST_REGISTER:
+      console.log('action payload = ', action.payload);
+      return {...state, user: action.payload};
     default:
       return state;
   }

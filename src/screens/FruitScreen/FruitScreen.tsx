@@ -22,8 +22,7 @@ export function FruitScreen() {
     dispatch(getItems());
   }, [dispatch]);
   const [nameTextInput, setNameTextInput] = useState('');
-  //console.log('textInput:' + nameTextInput);
-
+  //console.log('testare item' + items);
   for (const item of items) {
     //console.log('textul gol : ' + text2);
     if (nameTextInput === '') {
@@ -45,7 +44,10 @@ export function FruitScreen() {
           <Text style={FruitStyles.titleFlatList} numberOfLines={1}>
             Localitate: {item.localitate}
           </Text>
-          <Text style={FruitStyles.titlePrice}>Preț/kg: {item.pret}</Text>
+          <Text style={FruitStyles.titleFlatList} numberOfLines={1}>
+            Nume Produs: {item.numeProdus}
+          </Text>
+          <Text style={FruitStyles.titlePrice}>Preț/kg: {item.pret} lei</Text>
           <TouchableOpacity
             style={FruitStyles.button}
             activeOpacity={0.5}
@@ -105,4 +107,7 @@ export function FruitScreen() {
             console.log('settings');
           }}
         />
+         TESTING  =>       ################################
+        verificare_array_atribute[0].localitate,
+        verificare_array_atribute.attributes,
       </View>*/
