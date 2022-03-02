@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   TextInput,
@@ -6,83 +6,34 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
-  KeyboardAvoidingView,
   Platform,
-  SafeAreaView,
 } from 'react-native';
-
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import Styles from '../MainScreen/MainScreen.style.ts';
-import StatusBarTop from '../../components/StatusBarTop/StatusBarTop';
-import ButtonIcon from '../../components/ButtonIcon/ButtonIcon';
 import FruitStyles from './FruitScreen.style.ts';
-
-const DATA = [
-  {
-    id: 1,
-    numeVanzator: 'Ion',
-    numeProdus: 'Mere',
-    pret: 4,
-    localitate: 'Dumbravita',
-    urlPoza:
-      'https://www.centrulnatura.ro/wp-content/uploads/2015/03/mere-rosii.jpg',
-  },
-  {
-    id: 2,
-    numeVanzator: 'IonPopescu',
-    numeProdus: 'Pere',
-    pret: 4.5,
-    localitate: 'Timisoara',
-    urlPoza:
-      'https://www.lumeasatului.ro/media/k2/items/cache/4be1da12094acb24dcc707396b2832d0_L.jpg',
-  },
-  {
-    id: 3,
-    numeVanzator: 'Ion',
-    numeProdus: 'Mere',
-    pret: 4,
-    localitate: 'Dumbravita',
-    urlPoza:
-      'https://www.centrulnatura.ro/wp-content/uploads/2015/03/mere-rosii.jpg',
-  },
-  {
-    id: 4,
-    numeVanzator: 'Ion',
-    numeProdus: 'Mere',
-    pret: 4,
-    localitate: 'Dumbravita',
-    urlPoza:
-      'https://www.centrulnatura.ro/wp-content/uploads/2015/03/mere-rosii.jpg',
-  },
-  {
-    id: 5,
-    numeVanzator: 'Ion',
-    numeProdus: 'Mere',
-    pret: 4,
-    localitate: 'Dumbravita',
-    urlPoza:
-      'https://www.centrulnatura.ro/wp-content/uploads/2015/03/mere-rosii.jpg',
-  },
-  {
-    id: 6,
-    numeVanzator: 'Ion',
-    numeProdus: 'Mere',
-    pret: 4,
-    localitate: 'Dumbravita',
-    urlPoza:
-      'https://www.centrulnatura.ro/wp-content/uploads/2015/03/mere-rosii.jpg',
-  },
-  {
-    id: 7,
-    numeVanzator: 'Ion',
-    numeProdus: 'Mere',
-    pret: 4,
-    localitate: 'Dumbravita',
-    urlPoza:
-      'https://www.centrulnatura.ro/wp-content/uploads/2015/03/mere-rosii.jpg',
-  },
-];
+import {useSelector, useDispatch} from 'react-redux';
+import {getItems, addItem} from '../../redux/actions';
 
 export function FruitScreen() {
+  const {items} = useSelector(state => state.userReducer);
+  const itemsFiltrated = [];
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getItems());
+  }, [dispatch]);
+  const [nameTextInput, setNameTextInput] = useState('');
+  //console.log('testare item' + items);
+  for (const item of items) {
+    //console.log('textul gol : ' + text2);
+    if (nameTextInput === '') {
+      itemsFiltrated.push(item);
+    } else if (
+      item.numeProdus.toLowerCase().includes(nameTextInput.toLowerCase())
+    ) {
+      itemsFiltrated.push(item);
+    }
+  }
+  //console.log('LISTA FILTRATA: ' + itemsFiltrated);
   const renderItem = ({item}) => (
     <View style={FruitStyles.page}>
       <View style={FruitStyles.item}>
@@ -93,28 +44,39 @@ export function FruitScreen() {
           <Text style={FruitStyles.titleFlatList} numberOfLines={1}>
             Localitate: {item.localitate}
           </Text>
-          <Text style={FruitStyles.titleFlatList}>Preț/kg: {item.pret}</Text>
-          <TouchableOpacity style={FruitStyles.button} activeOpacity={0.5}>
-            <Text style={FruitStyles.titleFlatList}>Buy</Text>
+          <Text style={FruitStyles.titleFlatList} numberOfLines={1}>
+            Nume Produs: {item.numeProdus}
+          </Text>
+          <Text style={FruitStyles.titlePrice}>Preț/kg: {item.pret} lei</Text>
+          <TouchableOpacity
+            style={FruitStyles.button}
+            activeOpacity={0.5}
+            onPress={() => {
+              dispatch(addItem(item));
+            }}>
+            <Ionicons name="cart" size={40} color={'blue'} />
           </TouchableOpacity>
         </View>
       </View>
     </View>
   );
-
   return (
-    <SafeAreaView
+    <View
       behavior={Platform.OS === 'android' ? 'height' : 'padding'}
       style={FruitStyles.body}>
       <View style={Styles.searchbar}>
-        <TextInput style={Styles.input} placeholder="cauta" />
+        <TextInput
+          style={Styles.input}
+          placeholder="cauta"
+          onChangeText={insertText => setNameTextInput(insertText)}
+        />
       </View>
       <FlatList
-        data={DATA}
+        data={itemsFiltrated}
         renderItem={renderItem}
         keyExtractor={item => item.id}
       />
-    </SafeAreaView>
+    </View>
   );
 }
 /*<View style={Styles.statusbar}>
@@ -145,4 +107,7 @@ export function FruitScreen() {
             console.log('settings');
           }}
         />
+         TESTING  =>       ################################
+        verificare_array_atribute[0].localitate,
+        verificare_array_atribute.attributes,
       </View>*/

@@ -1,17 +1,21 @@
 import React from 'react';
-import {MainScreen} from './src/screens/MainScreen/MainScreen';
+//import {MainScreen} from './src/screens/MainScreen/MainScreen';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {FruitScreen} from './src/screens/FruitScreen/FruitScreen';
-import {ScreenA} from './src/screens/ScreenA/ScreenA';
-import {ScreenB} from './src/screens/ScreenB/ScreenB';
-import {ScreenC} from './src/screens/ScreenC/ScreenC';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+//import {createStackNavigator} from '@react-navigation/stack';
+//import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+//import {FruitScreen} from './src/screens/FruitScreen/FruitScreen';
+//import {ScreenA} from './src/screens/ScreenA/ScreenA';
+//import {ScreenB} from './src/screens/ScreenB/ScreenB';
+//import {CartScreen} from './src/screens/CartScreen/CartScreen';
+//import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Provider} from 'react-redux';
+import {Store} from './src/redux/store';
+//import {useSelector} from 'react-redux';
+import NaviContainer from './src/components/NaviContainer/NaviContainer';
 
-const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
-
+//const Stack = createStackNavigator();
+//const Tab = createBottomTabNavigator();
+/*
 function MyStack() {
   return (
     <Stack.Navigator>
@@ -19,48 +23,15 @@ function MyStack() {
       <Stack.Screen name="FruitScreen" component={FruitScreen} />
     </Stack.Navigator>
   );
-}
+}*/
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({route}) => ({
-          tabBarIcon: ({focused}) => {
-            let iconName;
-
-            if (route.name === 'MainStack') {
-              iconName = 'ios-home';
-            } else if (route.name === 'ScreenA') {
-              iconName = 'md-person';
-            } else if (route.name === 'ScreenB') {
-              iconName = 'ios-settings';
-            } else if (route.name === 'ScreenC') {
-              iconName = 'md-cart';
-            }
-            return (
-              <Ionicons
-                name={iconName}
-                size={focused === true ? 25 : 20}
-                color={focused ? '#f0f' : '#555'}
-              />
-            );
-          },
-          header: () => null,
-          activeTintColor: '#f0f',
-          inactiveBackgroundColor: '#999',
-          tabBarShowLabel: false,
-        })}>
-        <Tab.Screen name="MainStack" component={MyStack} />
-        <Tab.Screen name="ScreenA" component={ScreenA} />
-        <Tab.Screen name="ScreenB" component={ScreenB} />
-        <Tab.Screen
-          name="ScreenC"
-          component={ScreenC}
-          options={{tabBarBadge: 10}}
-        />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <Provider store={Store}>
+      <NavigationContainer>
+        <NaviContainer />
+      </NavigationContainer>
+    </Provider>
   );
 };
 
